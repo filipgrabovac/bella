@@ -1,0 +1,80 @@
+.mainDiv {
+    background-color: #137752;
+    height: 600px;
+}
+
+.gameStartButton {
+    margin:auto;
+    align-self: center;
+    border: none;
+    font-size:2rem;
+}
+
+.gameStartButton:hover{
+    animation: buttonHover;
+    animation-duration: 1s;
+    animation-fill-mode:both;
+}
+
+.personIcon{
+    width: 35%;
+    margin:auto;
+}
+
+.teamNames {    
+    display:flex;
+    justify-content: center;
+}
+
+.teamUsAnimation {
+    animation: teamUsHover 2s;
+}
+
+.teamThemAnimation {
+    animation: teamThemHover 2s;
+}
+
+.vsAnimation {
+    animation: growVs 2s forwards;
+}
+@keyframes buttonHover {    
+    from {background-color: white;}
+    to {background-color: #137752;
+    color:white;}
+}
+
+@keyframes teamUsHover {
+    from {
+        opacity: 0;
+        transform: translateX(-800%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes teamThemHover {
+    from {
+        opacity: 0;
+        transform: translateX(800%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }   
+}
+
+@keyframes growVs {
+    0% {
+        opacity: 0;
+        font-size: 32px;
+    }
+    50% {
+        opacity: 1;
+        font-size: 55px;
+    }
+    100% {
+        font-size: 45px;
+    }
+}
