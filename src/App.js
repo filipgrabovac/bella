@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import './App.css';
 
+import DealerSelection from './components/DealerSelection/DealerSelection';
 import TeamNameInputs from './components/TeamNameInputs/TeamNameInputs';
 import CreatedBy from './components/CreatedBy/CreatedBy';
-import DealerSelection from './components/DealerSelection/DealerSelection';
+
 
 class App extends Component {
   constructor(){
@@ -34,14 +35,23 @@ class App extends Component {
     this.setState({inputState:true})
   }
 
+  gameStartButton = (event) => {
+    this.setState({
+      gameStart: true
+    })
+    console.log('shit');
+    event.target.remove();
+  }
+
   render(){
+    const {nameOfTeamTHEM,nameOfTeamUS,inputState} = this.state;
   return (
     <div>
-      {this.state.gameStart === true ? <h1>this will be the game</h1> : 
-        this.state.inputState === true ? 
+      {inputState === true ? 
           <DealerSelection 
-            nameOfTeamTHEM = {this.state.nameOfTeamTHEM}
-            nameOfTeamUS = {this.state.nameOfTeamUS}
+            nameOfTeamTHEM = {nameOfTeamTHEM}
+            nameOfTeamUS = {nameOfTeamUS}
+            gameStartButton = {this.gameStartButton}
         /> :
           <TeamNameInputs 
             enteringTeamNames={this.enteringTeamNames} 

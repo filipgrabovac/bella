@@ -1,6 +1,7 @@
 .mainDiv {
-    background-color: #137752;
-    height: 600px;
+    background-color: #4bd3a1ee;
+    height: 850px;
+    margin: auto;
 }
 
 .gameStartButton {
@@ -8,12 +9,11 @@
     align-self: center;
     border: none;
     font-size:2rem;
-}
+    background-color:#137752;
+    border: 5px solid white;
+    color: white;
 
-.gameStartButton:hover{
-    animation: buttonHover;
-    animation-duration: 1s;
-    animation-fill-mode:both;
+    animation:  2s;
 }
 
 .personIcon{
@@ -24,6 +24,9 @@
 .teamNames {    
     display:flex;
     justify-content: center;
+    margin-top: 40px;
+    animation: teamNamesAnimation 2s;
+    background-color: #137752;
 }
 
 .teamUsAnimation {
@@ -37,6 +40,7 @@
 .vsAnimation {
     animation: growVs 2s forwards;
 }
+
 @keyframes buttonHover {    
     from {background-color: white;}
     to {background-color: #137752;
@@ -76,5 +80,17 @@
     }
     100% {
         font-size: 45px;
+    }
+}
+
+@keyframes teamNamesAnimation {
+    from {
+        background-color: transparent;
+        transform: translateY(500%);
+        /* width: 0%; */
+    }
+    to {
+        transform: translateY(0%);
+        /* width: 100%; */
     }
 }
