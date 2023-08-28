@@ -13,10 +13,10 @@ const DealerSelection = ({nameOfTeamUS, nameOfTeamTHEM, gameStartButton, onClick
             </div>
 
             <div className='dealerIcons mt4' onClick={onClickingDealer}>
-                <img src={personIcon} className='personIcon grow top_bottomIconMargin' id='icon'></img>
-                <img src={personIcon} className='personIcon grow middleIconMargin' id='icon'></img>
-                <img src={personIcon} className='personIcon grow middleIconMargin' id='icon'></img>
-                <img src={personIcon} className='personIcon grow top_bottomIconMargin' id='icon'></img>
+                <img src={personIcon} className='personIcon grow top_bottomIconMargin' id='1'></img>
+                <img src={personIcon} className='personIcon grow middleIconMargin' id='2'></img>
+                <img src={personIcon} className='personIcon grow middleIconMargin' id='3'></img>
+                <img src={personIcon} className='personIcon grow top_bottomIconMargin' id='4'></img>
 
                 <button className="grow pa4 br4 w-50 gameStartButton mv4" onClick = {gameStartButton}>Započni igru!</button>
             </div>

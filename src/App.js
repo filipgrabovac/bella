@@ -32,13 +32,16 @@ class App extends Component {
   }
 
   onEnteringTeamsButton = (event) => {
-    this.setState({inputState:true})
+    this.setState({
+      inputState:true
+    })
   }
 
   gameStartButton = (event) => {
     this.setState({
       gameStart: true
     })
+    
     event.target.remove();
   }
 

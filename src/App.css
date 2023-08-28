@@ -2,3 +2,15 @@
   text-align: center;
 }
 
+.dealerIconsAnimationGameStart {
+  animation: dealerIconsAnimationGameStart 2s forwards;
+}
+
+@keyframes dealerIconsAnimationGameStart {
+  from {
+    transform: translate(0);
+  }
+  to {
+      transform: translateX(200%);
+  }
+}

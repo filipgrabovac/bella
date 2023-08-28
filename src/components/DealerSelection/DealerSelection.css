@@ -55,7 +55,7 @@
     flex-wrap: wrap;
     align-items: center;
     opacity: 0;
-    animation: dealerIconAnimation 3s forwards;
+    animation: dealerIconAnimationOnMount 3s forwards;
 }
 .top_bottomIconMargin {
     margin:0 38% 0 38%;
@@ -63,6 +63,7 @@
 .middleIconMargin {
     margin: 8% 13% 8% 13%;
 }
+
 
 @keyframes buttonHover {    
     from {background-color: white;}
@@ -124,7 +125,7 @@
     }
 }
 
-@keyframes dealerIconAnimation {
+@keyframes dealerIconAnimationOnMount {
     from {
         transform: translateY(500%) rotate(300deg);
     }
@@ -132,3 +133,7 @@
         opacity: 1;
     }
 }
+
+
+
+
