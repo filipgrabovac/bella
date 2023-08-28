@@ -17,15 +17,21 @@
 }
 
 .personIcon{
-    width: 35%;
-    margin:auto;
+    width: 120px;
+    height: 120px;
+    margin:20px;
+    border: 5px solid white;
+    border-radius: 30px;
+    background-color: white;
 }
+
+
 
 .teamNames {    
     display:flex;
     justify-content: center;
     margin-top: 40px;
-    animation: teamNamesAnimation 2s;
+    animation: teamNamesAnimation 2s forwards;
     background-color: #137752;
 }
 
@@ -39,6 +45,23 @@
 
 .vsAnimation {
     animation: growVs 2s forwards;
+}
+
+.dealerIcons {
+    width: 550px;
+    height: 500px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    opacity: 0;
+    animation: dealerIconAnimation 3s forwards;
+}
+.top_bottomIconMargin {
+    margin:0 38% 0 38%;
+}
+.middleIconMargin {
+    margin: 8% 13% 8% 13%;
 }
 
 @keyframes buttonHover {    
@@ -72,25 +95,40 @@
 @keyframes growVs {
     0% {
         opacity: 0;
-        font-size: 32px;
+        font-size: 55px;
+        color:red;
     }
     50% {
         opacity: 1;
-        font-size: 55px;
+        font-size: 60px;
+        color: red;
     }
     100% {
-        font-size: 45px;
+        font-size: 55px;
     }
 }
 
 @keyframes teamNamesAnimation {
-    from {
+    0% {
         background-color: transparent;
-        transform: translateY(500%);
-        /* width: 0%; */
+        transform: translateY(300%);
+    }
+    80% {
+    }
+    90%{
+        background-color: transparent;
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes dealerIconAnimation {
+    from {
+        transform: translateY(500%) rotate(300deg);
     }
     to {
-        transform: translateY(0%);
-        /* width: 100%; */
+        opacity: 1;
     }
 }

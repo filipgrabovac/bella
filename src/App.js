@@ -39,8 +39,24 @@ class App extends Component {
     this.setState({
       gameStart: true
     })
-    console.log('shit');
     event.target.remove();
+  }
+
+  onClickingDealer = (event) => {
+    if(event.target.id) {
+      const children = event.target.parentElement.children;
+
+      for(var i=0;i<4;i++) {
+        if (children[i] === event.target) {
+          event.target.classList.add('bg-dark-green');
+        } else {
+          children[i].classList.remove('bg-dark-green');
+        }
+        
+      }
+  
+
+    }
   }
 
   render(){
@@ -52,6 +68,7 @@ class App extends Component {
             nameOfTeamTHEM = {nameOfTeamTHEM}
             nameOfTeamUS = {nameOfTeamUS}
             gameStartButton = {this.gameStartButton}
+            onClickingDealer = {this.onClickingDealer}
         /> :
           <TeamNameInputs 
             enteringTeamNames={this.enteringTeamNames} 
