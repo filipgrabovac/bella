@@ -1,5 +1,6 @@
 import React from "react";
 import './DealerSelection.css';
+import './DealerSelectionAnimations.css'
 import personIcon from './personIcon.png';
 
 const DealerSelection = ({nameOfTeamUS, nameOfTeamTHEM, gameStartButton, onClickingDealer}) => {
@@ -13,7 +14,8 @@ const DealerSelection = ({nameOfTeamUS, nameOfTeamTHEM, gameStartButton, onClick
             </div>
 
             <div className='dealerIcons mt4' onClick={onClickingDealer}>
-                <img src={personIcon} className='personIcon grow top_bottomIconMargin' id='1'></img>
+            
+                <img src={personIcon} className='personIcon grow top_bottomIconMargin bg-dark-green' id='1'></img>
                 <img src={personIcon} className='personIcon grow middleIconMargin' id='2'></img>
                 <img src={personIcon} className='personIcon grow middleIconMargin' id='3'></img>
                 <img src={personIcon} className='personIcon grow top_bottomIconMargin' id='4'></img>

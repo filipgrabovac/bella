@@ -41,6 +41,7 @@ class App extends Component {
     this.setState({
       gameStart: true
     })
+    event.target.parentElement.classList.add('none');
     event.target.remove();
   }
 
@@ -54,10 +55,7 @@ class App extends Component {
         } else {
           children[i].classList.remove('bg-dark-green');
         }
-        
       }
-  
-
     }
   }
 
