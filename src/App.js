@@ -41,7 +41,6 @@ class App extends Component {
     this.setState({
       gameStart: true
     })
-    event.target.parentElement.classList.add('none');
     event.target.remove();
   }
 

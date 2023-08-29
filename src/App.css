@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.dealerIconGameStartAnimation {
+.dealerIconGameStartAnimation:active {
   animation: dealerIconGameStart 2s forwards;
 }
 
