@@ -2,8 +2,15 @@
   text-align: center;
 }
 
-.dealerIconGameStartAnimation:active {
-  animation: dealerIconGameStart 2s forwards;
+.dealerIconGameStartAnimation {
+  width: 550px;
+  height: 500px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  animation: dealerIconGameStart 1s forwards;
+  pointer-events: none;
 }
 
 @keyframes dealerIconGameStart {
@@ -11,6 +18,9 @@
       transform: translateX(0);
   }
   to {
-      transform: translateX(130%) translateY(-20%) scale(0.5);
+      transform: translateX(120%) translateY(-30%) scale(0.5);
+      background-color: #137752;
+      border-radius: 100px;
+
   }
 }

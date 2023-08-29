@@ -41,6 +41,9 @@ class App extends Component {
     this.setState({
       gameStart: true
     })
+    event.target.parentElement.classList.remove('dealerIcons');
+    event.target.parentElement.classList.add('dealerIconGameStartAnimation')
+    console.log(event.target.parentElement.classList);
     event.target.remove();
   }
 
@@ -59,19 +62,23 @@ class App extends Component {
   }
 
   render(){
-    const {nameOfTeamTHEM,nameOfTeamUS,inputState} = this.state;
+    const {nameOfTeamTHEM,nameOfTeamUS,inputState, gameStart} = this.state;
   return (
     <div>
       {inputState === true ? 
+      <div>
           <DealerSelection 
             nameOfTeamTHEM = {nameOfTeamTHEM}
             nameOfTeamUS = {nameOfTeamUS}
             gameStartButton = {this.gameStartButton}
-            onClickingDealer = {this.onClickingDealer}
-        /> :
+            onClickingDealer = {this.onClickingDealer} 
+        /> 
+        {gameStart === true ? <h1>true</h1>: <h1>false</h1>}
+        </div> :
           <TeamNameInputs 
             enteringTeamNames={this.enteringTeamNames} 
             onEnteringTeamsButton={this.onEnteringTeamsButton} />
+           
       }
       
       <CreatedBy />

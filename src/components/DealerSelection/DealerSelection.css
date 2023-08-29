@@ -40,10 +40,11 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    opacity: 0;
+    opacity: 0;   
     animation: dealerIconAnimationOnMount 3s forwards;
     /* , dealerIconGameStart 2s forwards */
 }
+
 .top_bottomIconMargin {
     margin:0 38% 0 38%;
 }

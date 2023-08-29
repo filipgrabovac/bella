@@ -24,7 +24,7 @@ const DealerSelection = ({nameOfTeamUS, nameOfTeamTHEM, gameStartButton, onClick
             </div>
             
             <div>
-               
+               {}
             </div>
             
         </div>
