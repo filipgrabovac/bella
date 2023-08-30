@@ -73,7 +73,7 @@ class App extends Component {
             gameStartButton = {this.gameStartButton}
             onClickingDealer = {this.onClickingDealer} 
         /> 
-        {gameStart === true ? <h1>true</h1>: <h1>false</h1>}
+        {/* {gameStart === true ? <h1>true</h1>: <h1>false</h1>} */}
         </div> :
           <TeamNameInputs 
             enteringTeamNames={this.enteringTeamNames} 

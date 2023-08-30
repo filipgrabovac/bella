@@ -1,7 +1,8 @@
 .mainDiv {
     background-color: #4bd3a1ee;
-    height: 850px;
+    height:900px;
     margin: auto;
+    overflow-y: hidden;
 }
 
 .gameStartButton {
@@ -12,8 +13,6 @@
     background-color:#137752;
     border: 5px solid white;
     color: white;
-
-    animation:  2s;
 }
 
 .personIcon{
@@ -35,14 +34,13 @@
 
 .dealerIcons {
     width: 550px;
-    height: 500px;
+    height: 650px;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     opacity: 0;   
-    animation: dealerIconAnimationOnMount 3s forwards;
-    /* , dealerIconGameStart 2s forwards */
+    animation: dealerIconAnimationOnMount 3s forwards; 
 }
 
 .top_bottomIconMargin {
