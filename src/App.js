@@ -1,10 +1,11 @@
 import { Component } from 'react';
 import './App.css';
+// create an animation folder for every animation
 
 import DealerSelection from './components/DealerSelection/DealerSelection';
 import TeamNameInputs from './components/TeamNameInputs/TeamNameInputs';
 import CreatedBy from './components/CreatedBy/CreatedBy';
-
+import BelaBlok from './components/BelaBlok/BelaBlok';
 
 class App extends Component {
   constructor(){
@@ -43,7 +44,6 @@ class App extends Component {
     })
     event.target.parentElement.classList.remove('dealerIcons');
     event.target.parentElement.classList.add('dealerIconGameStartAnimation')
-    console.log(event.target.parentElement.classList);
     event.target.remove();
   }
 
@@ -71,17 +71,19 @@ class App extends Component {
             nameOfTeamTHEM = {nameOfTeamTHEM}
             nameOfTeamUS = {nameOfTeamUS}
             gameStartButton = {this.gameStartButton}
-            onClickingDealer = {this.onClickingDealer} 
-        /> 
-        {/* {gameStart === true ? <h1>true</h1>: <h1>false</h1>} */}
+            onClickingDealer = {this.onClickingDealer} /> 
+            {gameStart === true ? 
+                <BelaBlok /> : ''
+            }
         </div> :
+        <div>
           <TeamNameInputs 
             enteringTeamNames={this.enteringTeamNames} 
-            onEnteringTeamsButton={this.onEnteringTeamsButton} />
-           
+            onEnteringTeamsButton={this.onEnteringTeamsButton} /> 
+        </div>
       }
-      
       <CreatedBy />
+     
     </div>
 )}
 }

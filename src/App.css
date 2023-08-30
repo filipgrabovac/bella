@@ -18,8 +18,9 @@
       transform: translateX(0);
   }
   to {
-      transform: translateX(120%) translateY(-30%) scale(0.5);
+      transform: translateX(120%) translateY(20%) scale(0.5);
       background-color: #137752;
+      outline: 5px solid white;
       border-radius: 100px;
 
   }

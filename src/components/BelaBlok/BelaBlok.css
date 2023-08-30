@@ -1,0 +1,48 @@
+.BelaBlok {
+    position:fixed;
+    border-radius: 50px;
+    background-color: white;
+    height: 700px;
+    box-shadow: 5px 8px 10px grey;
+    width: 1100px;
+    margin-left: 200px;
+    animation: BelaBlokAnimationOnMount 2s forwards;
+}
+
+.inputsAndButtons {
+    background-color: #137752;
+    border: 5px solid white;
+    border-radius: 0 0 50px 50px ;
+    margin-top: 520px;
+    width: auto;
+}
+
+.gameButton {
+    background-color: #137752;
+    border: 3px solid white;
+    color: white;
+    font-size: 40px;
+    padding: 20px;
+    box-shadow: 10px 8px 50px grey;
+}
+.Input{
+    background-color: #137752; 
+    box-shadow: 10px 8px 50px grey;
+}
+
+.Input::placeholder {
+    color: rgba(255, 255, 255, 0.69);
+}
+
+.gameButtons {
+    justify-content: center;
+}
+
+@keyframes BelaBlokAnimationOnMount {
+    from {
+
+    }
+    to {
+        transform: translateY(-750px);
+    }
+}

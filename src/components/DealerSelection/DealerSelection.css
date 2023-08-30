@@ -1,9 +1,9 @@
 .mainDiv {
     background-color: #4bd3a1ee;
-    height: 900px;
-    margin: auto;
+    height:899px;
     overflow-y: hidden;
     overflow-x: hidden;
+    margin-top:-18px;
 }
 
 .gameStartButton {
@@ -30,7 +30,9 @@
     justify-content: center;
     animation: teamNamesAnimation 2s forwards;
     background-color: #137752;
+    border-radius: 0 0 30px 30px;
 }
+ 
 
 .dealerIcons {
     width: 550px;
