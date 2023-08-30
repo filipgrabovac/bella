@@ -24,3 +24,21 @@
 
   }
 }
+
+@media only screen and (max-width: 600px) {
+
+  .dealerIconGameStartAnimation {
+    justify-content: center;
+    height: 400px;
+    width: 100%;
+  }
+  @keyframes dealerIconGameStart {
+    from {
+    }
+    to {
+        transform:translateY(-45%) scale(0.2);
+        background-color: #137752;
+        border-radius: 100px;
+    }
+  }
+}

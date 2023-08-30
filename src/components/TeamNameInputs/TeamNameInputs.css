@@ -38,8 +38,8 @@ h1, h2 {
 
 .teamNamesText {
     font-size: 35px;
-    animation: onLoadHeader;
-    animation-duration: 2s;
+    border-bottom: 3px solid white;
+    animation: onLoadHeader 2s;
 }
 
 .Input{
@@ -120,21 +120,39 @@ h1, h2 {
     }
 }
 
+/* css for phones */
 @media only screen and (max-width: 600px) {
     .inputsAndTeams {
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
         margin: auto;
-        margin-top:200px;
+        margin-top:30px;
         margin-bottom: 100px;
         align-items: center;
-        height: 800px;
-        width:90%;
+        height: 650px;
+        width: 90%;
         border-radius: 50px;
         background-color: #137752ee;
         animation: onLoadBackground;
         animation-duration: 2s;
     }
-
+    .headers {
+        font-size: 30px;
+    }
+    .teamNamesText {
+        font-size: 25px;
+    }
+    .Input {
+        width: 60%;
+        height: 12%;
+        margin:0 0 -20px 0;
+        font-size:40px;
+    }
+    .Inputs{
+        margin-top:60px;
+    }
+    .teamNamesButton {
+        margin-top:50px;
+    }
 }
