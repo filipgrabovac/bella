@@ -121,7 +121,7 @@ h1, h2 {
 }
 
 /* css for phones */
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .inputsAndTeams {
         display: flex;
         flex-wrap: wrap;
