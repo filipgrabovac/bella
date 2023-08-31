@@ -19,15 +19,26 @@
 
 .gameButton {
     background-color: #137752;
-    border: 3px solid white;
+    border: none;
     color: white;
     font-size: 40px;
     padding: 20px;
     box-shadow: 10px 8px 50px grey;
 }
+
+.buttonsToggle {
+    background-color: #137752;
+    border: 5px solid white;
+}
+
 .Input{
     background-color: #137752; 
     box-shadow: 10px 8px 50px grey;
+}
+
+.Input::-webkit-outer-spin-button, .Input::-webkit-inner-spin-button {
+    appearance: none;
+    margin:0;
 }
 
 .Input::placeholder {

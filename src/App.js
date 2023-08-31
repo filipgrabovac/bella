@@ -14,7 +14,12 @@ class App extends Component {
       inputState:false,
       gameStart: false,
       nameOfTeamUS: 'Mi',
-      nameOfTeamTHEM: 'Vi'
+      nameOfTeamTHEM: 'Vi',
+      maxPoints: 0,
+      ourPoints: 0,
+      theirPoints: 0,
+      game: true,
+      calls: false
     }
   }
 
@@ -42,23 +47,78 @@ class App extends Component {
     this.setState({
       gameStart: true
     })
-    event.target.parentElement.classList.remove('dealerIcons');
+    event.target.parentElement.classList.remove('dealerIconsAndRangeButtons');
     event.target.parentElement.classList.add('dealerIconGameStartAnimation')
     event.target.remove();
   }
 
   onClickingDealer = (event) => {
-    if(event.target.id) {
-      const children = event.target.parentElement.children;
+      if (event.target.id){
+        const children = event.target.parentElement.children;
 
-      for(var i=0;i<4;i++) {
-        if (children[i] === event.target) {
-          event.target.classList.add('bg-dark-green');
-        } else {
-          children[i].classList.remove('bg-dark-green');
+        for(var i=0;i<4;i++) {
+          if (children[i] === event.target) {
+            children[i].classList.add('bg-dark-green');
+          } else if (children[i] !== event.target){
+            children[i].classList.remove('bg-dark-green');
+          }
         }
       }
     }
+
+
+  enteringPoints = (event) => {
+    const inputs = event.target.parentElement.children;
+    if (event.target.id == "us") {
+
+      if(event.target.value < 162) {
+        inputs[1].value = 162 - event.target.value;
+      } else 
+        inputs[1].value = 0;
+
+    }
+    else {
+
+      if (event.target.value < 162) {
+        inputs[0].value = 162 - event.target.value;
+      } else 
+        inputs[1].value = 0;
+    }
+    
+  }
+
+  gameCallsButtons = (event) => {
+    const buttons = event.target.parentElement.children;
+
+    if (event.target.id === 'game') {
+      this.setState({
+        game: true, 
+        calls: false
+      });
+      buttons[0].classList.add('buttonsToggle');
+      buttons[1].classList.remove('buttonsToggle');
+  }  
+    else if (event.target.id === 'calls') {
+      this.setState({
+        game: false, 
+        calls: true
+      }); 
+      buttons[0].classList.remove('buttonsToggle');
+      buttons[1].classList.add('buttonsToggle');
+  } 
+  }
+
+  gameRangeButtons = (event) => {
+    const buttons = event.target.parentElement.children;
+    console.log(buttons)
+    for (var i=0; i<3; i++) {
+      if (event.target.id === buttons[i].id) {
+        buttons[i].classList.add('gameRangeToggle');
+      } else {
+        buttons[i].classList.remove('gameRangeToggle');
+      }
+    }
+
   }
 
   render(){
@@ -71,9 +131,14 @@ class App extends Component {
             nameOfTeamTHEM = {nameOfTeamTHEM}
             nameOfTeamUS = {nameOfTeamUS}
             gameStartButton = {this.gameStartButton}
-            onClickingDealer = {this.onClickingDealer} /> 
+            onClickingDealer = {this.onClickingDealer} 
+            gameRangeButtons = {this.gameRangeButtons}
+            /> 
             {gameStart === true ? 
-                <BelaBlok /> : ''
+                <BelaBlok 
+                  enteringPoints = {this.enteringPoints}
+                  gameCallsButtons = {this.gameCallsButtons}
+                /> : console.log('the game has not started yet!')
             }
         </div> :
         <div>

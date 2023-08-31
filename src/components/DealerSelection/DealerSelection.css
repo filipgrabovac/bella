@@ -33,8 +33,25 @@
     border-radius: 0 0 30px 30px;
 }
  
+.gameRangeButtons {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 30px;
+}
 
-.dealerIcons {
+.gameRangeButton {
+    height:80px;
+    width:30%;
+    font-size: 50px;
+}
+
+.gameRangeToggle {
+    background-color: #137752;
+    color: white;
+}
+
+
+.dealerIconsAndRangeButtons {
     width: 550px;
     height: 650px;
     margin: auto;
