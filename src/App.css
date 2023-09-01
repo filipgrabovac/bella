@@ -3,8 +3,8 @@
 }
 
 .dealerIconGameStartAnimation {
-  width: 550px;
-  height: 500px;
+  width: 650px;
+  height: 650px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -18,10 +18,10 @@
       transform: translateX(0);
   }
   to {
-      transform: translateX(120%) translateY(20%) scale(0.5);
+      transform: translateX(100%) scale(0.5);
       background-color: #137752;
       outline: 5px solid white;
-      border-radius: 100px;
+      border-radius: 50px;
 
   }
 }

@@ -47,9 +47,10 @@ class App extends Component {
     this.setState({
       gameStart: true
     })
-    event.target.parentElement.classList.remove('dealerIconsAndRangeButtons');
-    event.target.parentElement.classList.add('dealerIconGameStartAnimation')
+    document.getElementById('dealerIconsAndRangeButtons').classList.remove('dealerIconsAndRangeButtons');
+    document.getElementById('dealerIconsAndRangeButtons').classList.add('dealerIconGameStartAnimation')
     event.target.remove();
+    console.log(this.state.maxPoints);
   }
 
   onClickingDealer = (event) => {
@@ -69,20 +70,26 @@ class App extends Component {
 
   enteringPoints = (event) => {
     const inputs = event.target.parentElement.children;
-    if (event.target.id == "us") {
 
-      if(event.target.value < 162) {
+    if (event.target.id == "us") {
+      if(event.target.value < 162 && event.target.value !== '0') {
         inputs[1].value = 162 - event.target.value;
-      } else 
-        inputs[1].value = 0;
+      } else if (event.target.value === '0') {
+          event.target.value = '';
+          inputs[1].value = '';
+      } else
+        inputs[1].value = '';
 
     }
-    else {
 
-      if (event.target.value < 162) {
+    else {
+      if (event.target.value < 162 && event.target.value !== '0') {
         inputs[0].value = 162 - event.target.value;
+      } else if (event.target.value === '0'){
+        event.target.value = '';
+        inputs[0].value = '';
       } else 
-        inputs[1].value = 0;
+        inputs[0].value = 0;
     }
     
   }
@@ -109,8 +116,10 @@ class App extends Component {
   }
 
   gameRangeButtons = (event) => {
+    this.setState({
+      maxPoints: event.target.value
+    })
     const buttons = event.target.parentElement.children;
-    console.log(buttons)
     for (var i=0; i<3; i++) {
       if (event.target.id === buttons[i].id) {
         buttons[i].classList.add('gameRangeToggle');

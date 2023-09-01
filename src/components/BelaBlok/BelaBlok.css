@@ -1,5 +1,5 @@
 .BelaBlok {
-    position:fixed;
+    /* position:fixed; */
     border-radius: 50px;
     background-color: white;
     height: 700px;
@@ -10,11 +10,11 @@
 }
 
 .inputsAndButtons {
-    background-color: #137752;
+    background-color: white;
     border: 5px solid white;
     border-radius: 0 0 50px 50px ;
-    margin-top: 520px;
     width: auto;
+    justify-content: center;
 }
 
 .gameButton {
@@ -28,7 +28,7 @@
 
 .buttonsToggle {
     background-color: #137752;
-    border: 5px solid white;
+    outline: 5px solid white;
 }
 
 .Input{
@@ -38,15 +38,26 @@
 
 .Input::-webkit-outer-spin-button, .Input::-webkit-inner-spin-button {
     appearance: none;
-    margin:0;
+    margin: 0;
 }
 
 .Input::placeholder {
     color: rgba(255, 255, 255, 0.69);
 }
 
+.Inputs {
+    justify-content: center;
+    margin-top: 20px;
+}
 .gameButtons {
     justify-content: center;
+    width: 80%;
+    margin-top:1%;
+}
+
+.gameRounds {
+    height: 500px;
+    background-color: #137752;
 }
 
 @keyframes BelaBlokAnimationOnMount {
@@ -54,6 +65,7 @@
 
     }
     to {
-        transform: translateY(-750px);
+        transform: translateY(-760px);
+        margin-left: 10%;
     }
 }
