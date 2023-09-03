@@ -16,10 +16,13 @@ class App extends Component {
       nameOfTeamUS: 'Mi',
       nameOfTeamTHEM: 'Vi',
       maxPoints: 0,
-      ourPoints: 0,
-      theirPoints: 0,
+      roundPointsUs: 0,
+      roundPointsThem: 0,
+      sumPointsUs: 0,
+      sumPointsThem: 0,
       game: true,
-      calls: false
+      calls: false,
+      count : 0
     }
   }
 
@@ -47,38 +50,61 @@ class App extends Component {
     this.setState({
       gameStart: true
     })
+
     document.getElementById('dealerIconsAndRangeButtons').classList.remove('dealerIconsAndRangeButtons');
     document.getElementById('dealerIconsAndRangeButtons').classList.add('dealerIconGameStartAnimation')
     event.target.remove();
-    console.log(this.state.maxPoints);
   }
 
+
+  switchingDealer = () => {
+      const Icons = document.getElementById('icons').children;
+      this.setState({
+        count: (this.state.count + 1) % 4
+      })
+      for (var i = 0; i < 4; ++i) {
+        if (Number.parseInt(Icons[i].id) === this.state.count) {
+          Icons[i].classList.add('bg-dark-green');
+        } else {
+          Icons[i].classList.remove('bg-dark-green');
+        }
+      }
+  }
+
+
   onClickingDealer = (event) => {
-      if (event.target.id){
+      if (event.target.id != 'icons' && !(this.state.gameStart)){
         const children = event.target.parentElement.children;
 
         for(var i=0;i<4;i++) {
+
           if (children[i] === event.target) {
             children[i].classList.add('bg-dark-green');
           } else if (children[i] !== event.target){
             children[i].classList.remove('bg-dark-green');
           }
         }
+
+        this.setState({
+          count: Number.parseInt(event.target.id)
+        })
       }
+
     }
 
 
-  enteringPoints = (event) => {
+  displayingPoints = (event) => {
+
     const inputs = event.target.parentElement.children;
 
-    if (event.target.id == "us") {
+    if (event.target.id == "roundPointsUs") {
       if(event.target.value < 162 && event.target.value !== '0') {
         inputs[1].value = 162 - event.target.value;
       } else if (event.target.value === '0') {
           event.target.value = '';
           inputs[1].value = '';
       } else
-        inputs[1].value = '';
+        inputs[1].value = 0;
 
     }
 
@@ -91,7 +117,15 @@ class App extends Component {
       } else 
         inputs[0].value = 0;
     }
-    
+  }
+
+
+  enteringRoundPoints = (event) => {
+    this.setState({
+      roundPointsUs: document.getElementById('roundPointsUs').value,
+      roundPointsThem: document.getElementById('roundPointsUs').value
+    })
+    this.switchingDealer();
   }
 
   gameCallsButtons = (event) => {
@@ -102,6 +136,7 @@ class App extends Component {
         game: true, 
         calls: false
       });
+
       buttons[0].classList.add('buttonsToggle');
       buttons[1].classList.remove('buttonsToggle');
   }  
@@ -116,6 +151,7 @@ class App extends Component {
   }
 
   gameRangeButtons = (event) => {
+    if (!this.state.gameStart) {
     this.setState({
       maxPoints: event.target.value
     })
@@ -127,7 +163,7 @@ class App extends Component {
         buttons[i].classList.remove('gameRangeToggle');
       }
     }
-
+  }
   }
 
   render(){
@@ -145,8 +181,10 @@ class App extends Component {
             /> 
             {gameStart === true ? 
                 <BelaBlok 
-                  enteringPoints = {this.enteringPoints}
+                  displayingPoints = {this.displayingPoints}
                   gameCallsButtons = {this.gameCallsButtons}
+                  switchingDealer = {this.switchingDealer}
+                  enteringRoundPoints = {this.enteringRoundPoints}
                 /> : console.log('the game has not started yet!')
             }
         </div> :

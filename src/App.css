@@ -10,7 +10,7 @@
   flex-wrap: wrap;
   align-items: center;
   animation: dealerIconGameStart 1s forwards;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 @keyframes dealerIconGameStart {

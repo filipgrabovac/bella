@@ -20,11 +20,11 @@ const DealerSelection = ({nameOfTeamUS, nameOfTeamTHEM, gameStartButton, onClick
                     <button id='1001' className='grow gameRangeButton br3 bn' value='1001' onClick={gameRangeButtons}>1001</button>
                 </div>
                 
-                <div className="flex flex-wrap w-100" onClick={onClickingDealer}>
-                    <img src={personIcon} className='personIcon grow top_bottomIconMargin bg-dark-green' id='1'></img>
-                    <img src={personIcon} className='personIcon grow middleIconMargin' id='2'></img>
+                <div id='icons' className="flex flex-wrap w-100" onClick={onClickingDealer}>
+                    <img src={personIcon} className='personIcon grow top_bottomIconMargin bg-dark-green' id='0'></img>
                     <img src={personIcon} className='personIcon grow middleIconMargin' id='3'></img>
-                    <img src={personIcon} className='personIcon grow top_bottomIconMargin' id='4'></img>
+                    <img src={personIcon} className='personIcon grow middleIconMargin' id='1'></img>
+                    <img src={personIcon} className='personIcon grow top_bottomIconMargin' id='2'></img>
                 </div>
             </div>
 
