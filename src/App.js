@@ -16,8 +16,10 @@ class App extends Component {
       nameOfTeamUS: 'Mi',
       nameOfTeamTHEM: 'Vi',
       maxPoints: 0,
-      roundPointsUs: 0,
-      roundPointsThem: 0,
+      roundPointsUs: '',
+      roundPointsThem: '',
+      roundCallsUs: '',
+      roundCallsThem: '',
       sumPointsUs: 0,
       sumPointsThem: 0,
       game: true,
@@ -94,42 +96,92 @@ class App extends Component {
 
 
   displayingPoints = (event) => {
-
     const inputs = event.target.parentElement.children;
 
-    if (event.target.id == "roundPointsUs") {
-      if(event.target.value < 162 && event.target.value !== '0') {
-        inputs[1].value = 162 - event.target.value;
-      } else if (event.target.value === '0') {
+    if (this.state.game){
+      if (event.target.id == "roundPointsUs") {
+        if(event.target.value < 162 && event.target.value > 0) {
+          inputs[1].value = 162 - event.target.value;
+        } 
+        else if (event.target.value >= 162) {
+            inputs[1].value = '0';
+            console.log('i am here!')
+        }
+        else {
+            inputs[0].value = '';
+            inputs[1].value = '';
+        } 
+      }
+      else {
+        if (event.target.value < 162 && event.target.value > 0) {
+          inputs[0].value = 162 - event.target.value;
+        } 
+        else if (event.target.value >= 162){
+          inputs[0].value = '0';
+        }
+        else {
           event.target.value = '';
-          inputs[1].value = '';
-      } else
-        inputs[1].value = 0;
+          inputs[0].value = '';
+        }
+      }
 
+      this.setState({
+        roundPointsUs: inputs[0].value,
+        roundPointsThem: inputs[1].value
+      })
+
+    } else if (this.state.calls) {
+      inputs[0].value = inputs[0].value === '0' ? '' : inputs[0].value;
+      inputs[1].value = inputs[1].value === '0' ? '' : inputs[1].value;
+
+
+      this.setState({
+        roundCallsUs: inputs[0].value,
+        roundCallsThem: inputs[1].value
+      })
     }
 
-    else {
-      if (event.target.value < 162 && event.target.value !== '0') {
-        inputs[0].value = 162 - event.target.value;
-      } else if (event.target.value === '0'){
-        event.target.value = '';
-        inputs[0].value = '';
-      } else 
-        inputs[0].value = 0;
-    }
-  }
+
+
+}
 
 
   enteringRoundPoints = (event) => {
-    this.setState({
-      roundPointsUs: document.getElementById('roundPointsUs').value,
-      roundPointsThem: document.getElementById('roundPointsUs').value
-    })
+    if (!(this.state.roundPointsUs && this.state.roundPointsThem)) {
+     return;
+    }
+
     this.switchingDealer();
+    
+    const round = document.createElement('li');
+    round.className = 'round';
+
+    const totalPointsUs = Number.parseInt(this.state.roundPointsUs) + Number.parseInt((this.state.roundCallsUs.length) ? this.state.roundCallsUs : '0');
+    const totalPointsThem = Number.parseInt(this.state.roundPointsThem) + Number.parseInt((this.state.roundCallsThem.length) ? this.state.roundCallsThem : '0');;
+
+    round.textContent = `${this.state.nameOfTeamUS}: ${totalPointsUs} ${this.state.nameOfTeamTHEM}: ${totalPointsThem}`;
+    document.getElementById('rounds').appendChild(round);
+
+    this.setState({
+      sumPointsUs: this.state.sumPointsUs + totalPointsUs,
+      sumPointsThem: this.state.sumPointsThem + totalPointsThem,
+      roundPointsUs: '',
+      roundPointsThem: '',
+      roundCallsUs: '',
+      roundCallsThem: ''
+    })
+
+    const inputs = document.getElementById('inputs').children;
+    inputs[0].value = '';
+    inputs[1].value = '';
   }
 
+
   gameCallsButtons = (event) => {
+
     const buttons = event.target.parentElement.children;
+
+    const inputs = document.getElementById('inputs').children;
 
     if (event.target.id === 'game') {
       this.setState({
@@ -139,6 +191,9 @@ class App extends Component {
 
       buttons[0].classList.add('buttonsToggle');
       buttons[1].classList.remove('buttonsToggle');
+
+      inputs[0].value = this.state.roundPointsUs;
+      inputs[1].value = this.state.roundPointsThem;
   }  
     else if (event.target.id === 'calls') {
       this.setState({
@@ -147,8 +202,12 @@ class App extends Component {
       }); 
       buttons[0].classList.remove('buttonsToggle');
       buttons[1].classList.add('buttonsToggle');
+
+      inputs[0].value = this.state.roundCallsUs;
+      inputs[1].value = this.state.roundCallsThem;
   } 
-  }
+
+}
 
   gameRangeButtons = (event) => {
     if (!this.state.gameStart) {
@@ -164,7 +223,7 @@ class App extends Component {
       }
     }
   }
-  }
+}
 
   render(){
     const {nameOfTeamTHEM,nameOfTeamUS,inputState, gameStart} = this.state;

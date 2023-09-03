@@ -19,7 +19,7 @@
 
 .gameButton {
     background-color: #137752;
-    border: none;
+    border: none; 
     color: white;
     font-size: 40px;
     padding: 20px;
@@ -58,7 +58,13 @@
 .gameRounds {
     height: 500px;
     background-color: #137752;
+    overflow-y: scroll;
 }
+.gameRounds::-webkit-scrollbar {
+    display: none;
+}
+
+
 
 @keyframes BelaBlokAnimationOnMount {
     from {
