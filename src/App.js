@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import './App.css';
+import xIcon from './xIcon.png';
 // create an animation folder for every animation
 
 import DealerSelection from './components/DealerSelection/DealerSelection';
@@ -96,6 +97,7 @@ class App extends Component {
 
 
   displayingPoints = (event) => {
+
     const inputs = event.target.parentElement.children;
 
     if (this.state.game){
@@ -105,7 +107,6 @@ class App extends Component {
         } 
         else if (event.target.value >= 162) {
             inputs[1].value = '0';
-            console.log('i am here!')
         }
         else {
             inputs[0].value = '';
@@ -140,9 +141,6 @@ class App extends Component {
         roundCallsThem: inputs[1].value
       })
     }
-
-
-
 }
 
 
@@ -154,13 +152,27 @@ class App extends Component {
     this.switchingDealer();
     
     const round = document.createElement('li');
+    const detailsUs = document.createElement('p');
+    const detailsThem = document.createElement('p');
+
+    detailsUs.className = 'details';
+    detailsThem.className = 'details';
+    detailsUs.textContent = 'it works1';
+    detailsThem.textContent = 'it works2';
     round.className = 'round';
+
+    round.onclick = () => {
+      round.classList.toggle('roundOnClick');
+    }
 
     const totalPointsUs = Number.parseInt(this.state.roundPointsUs) + Number.parseInt((this.state.roundCallsUs.length) ? this.state.roundCallsUs : '0');
     const totalPointsThem = Number.parseInt(this.state.roundPointsThem) + Number.parseInt((this.state.roundCallsThem.length) ? this.state.roundCallsThem : '0');;
 
     round.textContent = `${this.state.nameOfTeamUS}: ${totalPointsUs} ${this.state.nameOfTeamTHEM}: ${totalPointsThem}`;
+    round.appendChild(detailsUs);
+    // round.appendChild(detailsThem);
     document.getElementById('rounds').appendChild(round);
+
 
     this.setState({
       sumPointsUs: this.state.sumPointsUs + totalPointsUs,

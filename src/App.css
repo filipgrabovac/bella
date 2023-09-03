@@ -17,25 +17,41 @@
   text-align: center;
   list-style-type: none;
   background-color: white;
-  width:90%;
+  width: 90%;
   height: 15%;
   margin: auto;
-  margin-bottom: 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
   box-shadow: 10px 10px 10px gray;
   border-radius: 40px;
+  /* padding: 100px; */
+  overflow: hidden;
   outline: 4px solid #0c9764;
-  animation: roundAnimation 1s forwards;
+  animation: roundAnimation 1.5s forwards;
+}
+
+.roundOnClick {
+  transition: 1s;
+  height: 200px;
+  font-size: 60px;
+  padding-top: 10px;
+}
+
+.details {
+  border-top: 3px solid white;
 }
 
 @keyframes roundAnimation {
-  from {
+  0% {
     transform: translateY(300%);
-    background-color: #09FBD3;
-    opacity:0;
+    box-shadow: 0px 70px rgba(255, 255, 255, 0.686);
+    opacity: 0;
   }
-  to {
-
+  60% {
+    transform: translateY(-10%);
+  }
+  100% {
+    
   }
 }
 @keyframes dealerIconGameStart {
