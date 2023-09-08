@@ -1,11 +1,14 @@
 import React from "react";
 import './CreatedBy.css';
 
-const CreatedBy = () => {
+const CreatedBy = ({restartGame}) => {
     return(
-        <div>
-            <footer>CreatedBy @ Filip Grabovac</footer>
-
+        <div className=''>
+            <footer>
+                CreatedBy @ Filip Grabovac 
+                <button className = 'ml3' onClick={restartGame}>Restart!</button>
+            </footer>
+            
         </div>
     );
 }

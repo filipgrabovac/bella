@@ -1,0 +1,70 @@
+.teamNames {    
+    display: flex;
+    justify-content: center;
+    animation: teamNamesAnimation 2s forwards;
+    background-color: #137752;
+    margin-top: -18px;
+}
+
+.teamUsAnimation {
+    animation: teamUsHover 2s;
+}
+
+.teamThemAnimation {
+    animation: teamThemHover 2s;
+}
+
+.vsAnimation {
+    animation: growVs 2s forwards;
+    margin: 30px;
+}
+
+@keyframes teamUsHover {
+    from {
+        opacity: 0;
+        transform: translateX(-800%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes teamThemHover {
+    from {
+        opacity: 0;
+        transform: translateX(800%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }   
+}
+
+@keyframes growVs {
+    0% {
+        opacity: 0;
+        font-size: 50px;
+        color:red;
+    }
+    50% {
+        opacity: 40;
+        font-size: 65px;
+        color: red;
+    }
+    100% {
+        font-size: 50px;
+    }
+}
+
+@keyframes teamNamesAnimation {
+    0% {
+        background-color: transparent;
+        transform: translateY(500%);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

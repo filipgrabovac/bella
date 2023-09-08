@@ -3,16 +3,11 @@ import './DealerSelection.css';
 import './DealerSelectionAnimations.css'
 import personIcon from './personIcon.png';
 
-const DealerSelection = ({nameOfTeamUS, nameOfTeamTHEM, gameStartButton, onClickingDealer, gameRangeButtons}) => {
+const DealerSelection = ({gameStartButton, onClickingDealer, gameRangeButtons}) => {
     return(
-        <div className='mainDiv'>
-            <div className='teamNames'>
-                <h1 className='mh3 teamUsAnimation white'> {nameOfTeamUS}</h1>
-                <h1 className='vsAnimation white'> VS </h1>
-                <h1 className='mh3 teamThemAnimation white'> {nameOfTeamTHEM}</h1>
-            </div>
+        <div id = 'mainDiv' className='mainDiv'>
 
-            <div id='dealerIconsAndRangeButtons' className='dealerIconsAndRangeButtons mt1' >
+            <div id='dealerIconsAndRangeButtons' className='dealerIconsAndRangeButtons mt5' >
 
                 <div className='flex flex-wrap br4 pa3 gameRangeButtons'>   
                     <button id='501' className='grow gameRangeToggle gameRangeButton br3 bn' value='501' onClick={gameRangeButtons}>501</button>
@@ -31,6 +26,7 @@ const DealerSelection = ({nameOfTeamUS, nameOfTeamTHEM, gameStartButton, onClick
             <div className='flex flex-wrap jc'>
                 <button className="grow pa4 br4 gameStartButton mv3" onClick = {gameStartButton}>Započni igru!</button>
             </div>
+            
         </div>
     );
 }

@@ -4,7 +4,6 @@ import './TeamNameInputs.css';
 
 const TeamNameInputs = ({enteringTeamNames, onEnteringTeamsButton}) => {
     return (
-        <div>
             <div className ="inputsAndTeams">
                 <h1 className="headers f1">
                     DOBRODOŠLI U NOVU BELA BLOK APLIKACIJU
@@ -21,7 +20,6 @@ const TeamNameInputs = ({enteringTeamNames, onEnteringTeamsButton}) => {
 
                 <button className="grow br4 teamNamesButton dim" onClick={onEnteringTeamsButton}>Upiši</button>
             </div>
-        </div>
     );
 }
 

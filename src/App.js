@@ -5,30 +5,33 @@ import xIcon from './xIcon.png';
 
 import DealerSelection from './components/DealerSelection/DealerSelection';
 import TeamNameInputs from './components/TeamNameInputs/TeamNameInputs';
+import TeamNames from './components/TeamNames/TeamNames';
 import CreatedBy from './components/CreatedBy/CreatedBy';
 import BelaBlok from './components/BelaBlok/BelaBlok';
+import GameEnd from './components/GameEnd/GameEnd';
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
-      inputState:false,
+      inputState: false,
       gameStart: false,
+      gameEnd: false,
       nameOfTeamUS: 'Mi',
       nameOfTeamTHEM: 'Vi',
-      maxPoints: 0,
+      maxPoints: 501,
       roundPointsUs: '',
       roundPointsThem: '',
       roundCallsUs: '',
       roundCallsThem: '',
-      sumPointsUs: 0,
-      sumPointsThem: 0,
+      totalPointsUs: 0,
+      totalPointsThem: 0,
       game: true,
       calls: false,
       count : 0
     }
   }
-
+  
   enteringTeamNames = (event) => {
     if(event.target.id === 'mi'){
       this.setState({
@@ -40,13 +43,20 @@ class App extends Component {
       this.setState({
         nameOfTeamTHEM: event.target.value
       });
+      
     }
   }
 
   onEnteringTeamsButton = (event) => {
-    this.setState({
-      inputState:true
-    })
+    event.target.parentElement.classList.remove('inputsAndTeams');
+    event.target.parentElement.classList.add('inputsAndTeamsOnSubmit');
+
+    setTimeout(()=>{
+      this.setState({
+        inputState: true})
+      localStorage.setItem('inputState', JSON.stringify(true));
+    }, 1000)
+    
   }
 
   gameStartButton = (event) => {
@@ -55,23 +65,23 @@ class App extends Component {
     })
 
     document.getElementById('dealerIconsAndRangeButtons').classList.remove('dealerIconsAndRangeButtons');
-    document.getElementById('dealerIconsAndRangeButtons').classList.add('dealerIconGameStartAnimation')
+    document.getElementById('dealerIconsAndRangeButtons').classList.add('dealerIconGameStartAnimation');
     event.target.remove();
   }
 
-
   switchingDealer = () => {
       const Icons = document.getElementById('icons').children;
-      this.setState({
-        count: (this.state.count + 1) % 4
-      })
       for (var i = 0; i < 4; ++i) {
-        if (Number.parseInt(Icons[i].id) === this.state.count) {
+        if (Number.parseInt(Icons[i].id) === (this.state.count + 1) % 4) {
           Icons[i].classList.add('bg-dark-green');
         } else {
           Icons[i].classList.remove('bg-dark-green');
         }
       }
+
+      this.setState({
+        count: (this.state.count + 1) % 4
+      })
   }
 
 
@@ -145,38 +155,48 @@ class App extends Component {
 
 
   enteringRoundPoints = (event) => {
+    console.log(this.state.maxPoints)
     if (!(this.state.roundPointsUs && this.state.roundPointsThem)) {
      return;
     }
 
     this.switchingDealer();
-    
+
     const round = document.createElement('li');
     const detailsUs = document.createElement('p');
     const detailsThem = document.createElement('p');
+    const details = document.createElement('p');
+    
+    const totalPointsUs = Number.parseInt(this.state.roundPointsUs) + Number.parseInt((this.state.roundCallsUs.length) ? this.state.roundCallsUs : '0');
+    const totalPointsThem = Number.parseInt(this.state.roundPointsThem) + Number.parseInt((this.state.roundCallsThem.length) ? this.state.roundCallsThem : '0');
 
     detailsUs.className = 'details';
     detailsThem.className = 'details';
-    detailsUs.textContent = 'it works1';
-    detailsThem.textContent = 'it works2';
-    round.className = 'round';
+    detailsUs.textContent = `${this.state.nameOfTeamUS}: ${this.state.roundPointsUs} Zvanja: ${this.state.roundCallsUs ? this.state.roundCallsUs :'0'}`;
+    detailsThem.textContent = `${this.state.nameOfTeamTHEM}: ${this.state.roundPointsThem} Zvanja: ${this.state.roundCallsThem ? this.state.roundCallsThem :'0'}`;
+    details.className = 'detailsAll';
+
+    details.append(detailsUs);
+    details.append(detailsThem);
+
+    round.className = 'round roundDetailsExit';
 
     round.onclick = () => {
-      round.classList.toggle('roundOnClick');
+      round.classList.toggle('roundDetailsEnter');
+      round.classList.toggle('roundDetailsExit');
     }
 
-    const totalPointsUs = Number.parseInt(this.state.roundPointsUs) + Number.parseInt((this.state.roundCallsUs.length) ? this.state.roundCallsUs : '0');
-    const totalPointsThem = Number.parseInt(this.state.roundPointsThem) + Number.parseInt((this.state.roundCallsThem.length) ? this.state.roundCallsThem : '0');;
 
     round.textContent = `${this.state.nameOfTeamUS}: ${totalPointsUs} ${this.state.nameOfTeamTHEM}: ${totalPointsThem}`;
-    round.appendChild(detailsUs);
-    // round.appendChild(detailsThem);
+    round.append(details);
     document.getElementById('rounds').appendChild(round);
 
-
+    const newPointsUs = this.state.totalPointsUs + totalPointsUs; 
+    const newPointsThem = this.state.totalPointsThem + totalPointsThem;
+    
     this.setState({
-      sumPointsUs: this.state.sumPointsUs + totalPointsUs,
-      sumPointsThem: this.state.sumPointsThem + totalPointsThem,
+      totalPointsUs: newPointsUs,
+      totalPointsThem: newPointsThem,
       roundPointsUs: '',
       roundPointsThem: '',
       roundCallsUs: '',
@@ -186,7 +206,19 @@ class App extends Component {
     const inputs = document.getElementById('inputs').children;
     inputs[0].value = '';
     inputs[1].value = '';
+    
+    if (newPointsUs >= this.state.maxPoints || newPointsThem >= this.state.maxPoints) {
+      setTimeout(()=>this.setState({
+        gameEnd: true,
+        inputState: false
+      }), 1500) 
+      localStorage.setItem('inputState', JSON.stringify(false));
+
+      document.getElementById('BelaBlok').style.pointerEvents = 'none';
+    }
   }
+
+
 
 
   gameCallsButtons = (event) => {
@@ -237,35 +269,108 @@ class App extends Component {
   }
 }
 
+  onGameRestart = (event) => {
+    if(event.target.id === 'changeTeams') {
+      localStorage.setItem('inputState', JSON.stringify(false))
+      this.setState({
+        gameStart: false,
+        gameEnd: false,
+        nameOfTeamUS: 'Mi',
+        nameOfTeamTHEM: 'Vi',
+        maxPoints: 501,
+        roundPointsUs: '',
+        roundPointsThem: '',
+        roundCallsUs: '',
+        roundCallsThem: '',
+        totalPointsUs: 0,
+        totalPointsThem: 0,
+        game: true,
+        calls: false,
+        count : 0
+      })
+    } else if (event.target.id === 'dontChangeTeams'){
+      this.setState({
+        gameStart: false,
+        gameEnd: false,
+        maxPoints: 501,
+        roundPointsUs: '',
+        roundPointsThem: '',
+        roundCallsUs: '',
+        roundCallsThem: '',
+        totalPointsUs: 0,
+        totalPointsThem: 0,
+        game: true,
+        calls: false,
+        count : 0
+      })
+      localStorage.setItem('inputState', JSON.stringify(true))
+    }
+}
+
+  restartGame = (event)=>{
+    this.setState({
+      inputState: false
+    })
+    localStorage.setItem('inputState', JSON.stringify(false));
+  }
+
+  checkingDealer = (event) => {
+    if(event.target.id === this.state.count.toString()) {
+      event.target.classList.add('bg-dark-green')
+    }
+  }
+  
+
   render(){
-    const {nameOfTeamTHEM,nameOfTeamUS,inputState, gameStart} = this.state;
+    const {nameOfTeamTHEM,nameOfTeamUS, gameStart, gameEnd, totalPointsUs, totalPointsThem, count} = this.state;
   return (
-    <div>
-      {inputState === true ? 
-      <div>
-          <DealerSelection 
-            nameOfTeamTHEM = {nameOfTeamTHEM}
-            nameOfTeamUS = {nameOfTeamUS}
-            gameStartButton = {this.gameStartButton}
-            onClickingDealer = {this.onClickingDealer} 
-            gameRangeButtons = {this.gameRangeButtons}
-            /> 
-            {gameStart === true ? 
-                <BelaBlok 
-                  displayingPoints = {this.displayingPoints}
-                  gameCallsButtons = {this.gameCallsButtons}
-                  switchingDealer = {this.switchingDealer}
-                  enteringRoundPoints = {this.enteringRoundPoints}
-                /> : console.log('the game has not started yet!')
-            }
-        </div> :
+    <div>   
+        {gameStart ? 
+          (gameEnd ? <GameEnd 
+            nameOfTeamUS={nameOfTeamUS}
+            nameOfTeamTHEM={nameOfTeamTHEM}
+            totalPointsUs={totalPointsUs}
+            totalPointsThem={totalPointsThem}
+            onGameRestart = {this.onGameRestart}
+          /> : 
+           <div>
+            <TeamNames 
+              nameOfTeamUS={nameOfTeamUS}
+              nameOfTeamTHEM={nameOfTeamTHEM}
+              totalPointsUs={totalPointsUs}
+              totalPointsThem={totalPointsThem}
+              /> 
+            <BelaBlok 
+              displayingPoints = {this.displayingPoints}
+              gameCallsButtons = {this.gameCallsButtons}
+              switchingDealer = {this.switchingDealer}
+              enteringRoundPoints = {this.enteringRoundPoints}
+              onClickingDealer={this.onClickingDealer}
+              checkingDealer={this.checkingDealer}
+              />
+            </div>
+            )
+             : 
         <div>
-          <TeamNameInputs 
-            enteringTeamNames={this.enteringTeamNames} 
-            onEnteringTeamsButton={this.onEnteringTeamsButton} /> 
+        
+          {JSON.parse(localStorage.inputState) ? <div> 
+                          <DealerSelection 
+                            gameStartButton={this.gameStartButton}
+                            onClickingDealer={this.onClickingDealer}
+                            gameRangeButtons={this.gameRangeButtons}
+                            />
+                        </div>
+                      : <TeamNameInputs 
+                          enteringTeamNames={this.enteringTeamNames} 
+                          onEnteringTeamsButton={this.onEnteringTeamsButton} /> 
+              }
+             
         </div>
-      }
-      <CreatedBy />
+        }
+      
+      <CreatedBy 
+        restartGame = {this.restartGame}
+      />
      
     </div>
 )}

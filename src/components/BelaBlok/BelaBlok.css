@@ -1,12 +1,20 @@
+.master {
+    height: 1000px;
+    animation: backgroundOnMount 2s forwards;
+    animation-delay: 2s;
+}
+
 .BelaBlok {
-    /* position:fixed; */
     border-radius: 50px;
     background-color: white;
     height: 700px;
     box-shadow: 5px 8px 10px grey;
-    width: 1100px;
-    margin-left: 200px;
+    width: 1200px;
+    margin: 2% 0px 10% 5%;
+    
     animation: BelaBlokAnimationOnMount 2s forwards;
+    animation-delay: 1s;
+    opacity: 0;
 }
 
 .inputsAndButtons {
@@ -52,26 +60,74 @@
 .gameButtons {
     justify-content: center;
     width: 80%;
-    margin-top:1%;
 }
 
 .gameRounds {
     height: 500px;
+    width: 100%; 
     background-color: #137752;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .gameRounds::-webkit-scrollbar {
     display: none;
 }
 
+.personIcon {
+    width: 7em;
+    height: 7em;
+    margin: 20px;
+    border: 5px solid white;
+    border-radius: 30px;
+} 
+
+.top_bottomIconMargin {
+    margin: 0 40% 0 40%;
+}
+.middleIconMargin {
+    margin: 7% 11% 7% 16%;
+}
+
+.dealerIcons {
+    scale: 0.7;
+    width: 30%;
+    height: 50%;
+    margin: 5% 1% 5% 3%;
+    padding-top: 18px;
+    background-color: #137752;
+    border-radius: 50px;
+    pointer-events: none;
+    opacity: 0;
+    animation: dealerIconsOnGameStart 2s forwards;
+    animation-delay: 1.5s;
+}
 
 
 @keyframes BelaBlokAnimationOnMount {
     from {
-
+        transform: translateY(750px);
+        opacity: 1;
     }
     to {
-        transform: translateY(-760px);
-        margin-left: 10%;
+        opacity: 1;
+    }
+}
+
+@keyframes backgroundOnMount {
+    from {
+        background-color: none;
+    }
+    to{
+        background-color: #4bd3a1ee;
+    }
+}
+
+@keyframes dealerIconsOnGameStart {
+    from {
+        opacity: 0;
+        scale: 0.2;
+    }
+    to {
+        opacity: 1;
+
     }
 }
