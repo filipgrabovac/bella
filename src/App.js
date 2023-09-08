@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import './App.css';
-import xIcon from './xIcon.png';
 // create an animation folder for every animation
 
 import DealerSelection from './components/DealerSelection/DealerSelection';
