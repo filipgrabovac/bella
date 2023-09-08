@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import './App.css';
-// create an animation folder for every animation
 
 import DealerSelection from './components/DealerSelection/DealerSelection';
 import TeamNameInputs from './components/TeamNameInputs/TeamNameInputs';
@@ -352,7 +351,7 @@ class App extends Component {
              : 
         <div>
         
-          {JSON.parse(localStorage.inputState) ? <div> 
+          {localStorage.inputState ? <div> 
                           <DealerSelection 
                             gameStartButton={this.gameStartButton}
                             onClickingDealer={this.onClickingDealer}
