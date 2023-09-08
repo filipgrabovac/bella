@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/bella/static/css/main.56fd1d07.css",
+    "main.js": "/bella/static/js/main.8c2bd593.js",
+    "static/js/787.b19c1c6a.chunk.js": "/bella/static/js/787.b19c1c6a.chunk.js",
+    "static/media/bela-pozadina.jpg": "/bella/static/media/bela-pozadina.a953685919f2003175ec.jpg",
+    "index.html": "/bella/index.html",
+    "main.56fd1d07.css.map": "/bella/static/css/main.56fd1d07.css.map",
+    "main.8c2bd593.js.map": "/bella/static/js/main.8c2bd593.js.map",
+    "787.b19c1c6a.chunk.js.map": "/bella/static/js/787.b19c1c6a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.56fd1d07.css",
+    "static/js/main.8c2bd593.js"
+  ]
+}
