@@ -28,6 +28,7 @@ class App extends Component {
       calls: false,
       count : 0
     }
+    localStorage.setItem('inputState', JSON.stringify(false));
   }
   
   enteringTeamNames = (event) => {
