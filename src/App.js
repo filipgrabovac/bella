@@ -352,7 +352,7 @@ class App extends Component {
              : 
         <div>
         
-          { inputState ? <div> 
+          {inputState ? <div> 
                           <DealerSelection 
                             gameStartButton={this.gameStartButton}
                             onClickingDealer={this.onClickingDealer}
