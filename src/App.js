@@ -351,7 +351,7 @@ class App extends Component {
              : 
         <div>
         
-          {localStorage.inputState ? <div> 
+          {JSON.parse(localStorage.inputState) ? <div> 
                           <DealerSelection 
                             gameStartButton={this.gameStartButton}
                             onClickingDealer={this.onClickingDealer}
