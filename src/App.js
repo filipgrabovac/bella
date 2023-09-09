@@ -321,7 +321,7 @@ class App extends Component {
   
 
   render(){
-    const {nameOfTeamTHEM,nameOfTeamUS, gameStart, gameEnd, totalPointsUs, totalPointsThem, count} = this.state;
+    const {nameOfTeamTHEM,nameOfTeamUS, gameStart, inputState, gameEnd, totalPointsUs, totalPointsThem, count} = this.state;
   return (
     <div>   
         {gameStart ? 
@@ -352,7 +352,7 @@ class App extends Component {
              : 
         <div>
         
-          {JSON.parse(localStorage.inputState) ? <div> 
+          { inputState ? <div> 
                           <DealerSelection 
                             gameStartButton={this.gameStartButton}
                             onClickingDealer={this.onClickingDealer}
