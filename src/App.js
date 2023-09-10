@@ -53,7 +53,7 @@ class App extends Component {
     setTimeout(()=>{
       this.setState({
         inputState: true})
-      localStorage.setItem('inputState', JSON.stringify(true));
+        localStorage.setItem('inputState', JSON.stringify(true));
     }, 1000)
     
   }
@@ -217,9 +217,6 @@ class App extends Component {
     }
   }
 
-
-
-
   gameCallsButtons = (event) => {
 
     const buttons = event.target.parentElement.children;
@@ -273,6 +270,7 @@ class App extends Component {
       localStorage.setItem('inputState', JSON.stringify(false))
       this.setState({
         gameStart: false,
+        inputState: false,
         gameEnd: false,
         nameOfTeamUS: 'Mi',
         nameOfTeamTHEM: 'Vi',
