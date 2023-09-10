@@ -289,6 +289,7 @@ class App extends Component {
       this.setState({
         gameStart: false,
         gameEnd: false,
+        inputState: true,
         maxPoints: 501,
         roundPointsUs: '',
         roundPointsThem: '',
