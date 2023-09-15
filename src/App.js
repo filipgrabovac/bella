@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 import DealerSelection from './components/DealerSelection/DealerSelection';
@@ -8,108 +8,84 @@ import CreatedBy from './components/CreatedBy/CreatedBy';
 import BelaBlok from './components/BelaBlok/BelaBlok';
 import GameEnd from './components/GameEnd/GameEnd';
 
-class App extends Component {
-  constructor(){
-    super();
-    this.state = {
-      inputState: false,
-      gameStart: false,
-      gameEnd: false,
-      nameOfTeamUS: 'Mi',
-      nameOfTeamTHEM: 'Vi',
-      maxPoints: 501,
-      roundPointsUs: '',
-      roundPointsThem: '',
-      roundCallsUs: '',
-      roundCallsThem: '',
-      totalPointsUs: 0,
-      totalPointsThem: 0,
-      game: true,
-      calls: false,
-      count : 0
-    }
-    localStorage.setItem('inputState', JSON.stringify(false));
-  }
+const App =() => {
+  const [inputState, setInputState] = useState(false);
+  const [gameStart, setGameStart] = useState(false);
+  const [gameEnd, setGameEnd] = useState(false);
+  const [nameOfTeamUS, setNameOfTeamUS] = useState('Mi');
+  const [nameOfTeamTHEM, setNameOfTeamTHEM] = useState('Vi');
+  const [maxPoints, setMaxPoints] = useState(501);
+  const [roundPointsUs, setRoundPointsUs] = useState('');
+  const [roundPointsThem, setRoundPointsThem] = useState('');
+  const [roundCallsUs, setRoundCallsUs] = useState('');
+  const [roundCallsThem, setRoundCallsThem] = useState('');
+  const [totalPointsUs, setTotalPointsUs] = useState(0);
+  const [totalPointsThem, setTotalPointsThem] = useState(0);
+  const [game, setGame] = useState(true);
+  const [calls, setCalls] = useState(false);
+  const [count, setCount] = useState(0);
   
-  enteringTeamNames = (event) => {
+  const enteringTeamNames = (event) => {
     if(event.target.id === 'mi'){
-      this.setState({
-        nameOfTeamUS: event.target.value
-      });
+      setNameOfTeamUS(event.target.value);
     }
 
     if(event.target.id === 'vi'){
-      this.setState({
-        nameOfTeamTHEM: event.target.value
-      });
-      
+      setNameOfTeamTHEM(event.target.value);
     }
   }
 
-  onEnteringTeamsButton = (event) => {
+  const onEnteringTeamsButton = (event) => {
     event.target.parentElement.classList.remove('inputsAndTeams');
     event.target.parentElement.classList.add('inputsAndTeamsOnSubmit');
 
     setTimeout(()=>{
-      this.setState({
-        inputState: true})
-        localStorage.setItem('inputState', JSON.stringify(true));
+      setInputState(true)
+      localStorage.setItem('inputState', JSON.stringify(true));
     }, 1000)
     
   }
 
-  gameStartButton = (event) => {
-    this.setState({
-      gameStart: true
-    })
+  const gameStartButton = (event) => {
+    setGameStart(true);
 
     document.getElementById('dealerIconsAndRangeButtons').classList.remove('dealerIconsAndRangeButtons');
     document.getElementById('dealerIconsAndRangeButtons').classList.add('dealerIconGameStartAnimation');
     event.target.remove();
   }
 
-  switchingDealer = () => {
+  const switchingDealer = () => {
       const Icons = document.getElementById('icons').children;
       for (var i = 0; i < 4; ++i) {
-        if (Number.parseInt(Icons[i].id) === (this.state.count + 1) % 4) {
+        if (Number.parseInt(Icons[i].id) === (count + 1) % 4) {
           Icons[i].classList.add('bg-dark-green');
         } else {
           Icons[i].classList.remove('bg-dark-green');
         }
       }
-
-      this.setState({
-        count: (this.state.count + 1) % 4
-      })
+      setCount((count + 1) % 4); 
   }
 
-
-  onClickingDealer = (event) => {
-      if (event.target.id != 'icons' && !(this.state.gameStart)){
+  const onClickingDealer = (event) => {
+      if (event.target.id != 'icons' && !(gameStart)){
         const children = event.target.parentElement.children;
 
         for(var i=0;i<4;i++) {
-
           if (children[i] === event.target) {
             children[i].classList.add('bg-dark-green');
           } else if (children[i] !== event.target){
             children[i].classList.remove('bg-dark-green');
           }
         }
-
-        this.setState({
-          count: Number.parseInt(event.target.id)
-        })
-      }
-
+       setCount(Number.parseInt(event.target.id));
     }
+  }
 
-
-  displayingPoints = (event) => {
+  const displayingPoints = (event) => {
 
     const inputs = event.target.parentElement.children;
 
-    if (this.state.game){
+    if (game){
       if (event.target.id == "roundPointsUs") {
         if(event.target.value < 162 && event.target.value > 0) {
           inputs[1].value = 162 - event.target.value;
@@ -134,45 +110,37 @@ class App extends Component {
           inputs[0].value = '';
         }
       }
+      setRoundPointsUs(inputs[0].value);
+      setRoundPointsThem(inputs[1].value);
 
-      this.setState({
-        roundPointsUs: inputs[0].value,
-        roundPointsThem: inputs[1].value
-      })
-
-    } else if (this.state.calls) {
+    } else if (calls) {
       inputs[0].value = inputs[0].value === '0' ? '' : inputs[0].value;
       inputs[1].value = inputs[1].value === '0' ? '' : inputs[1].value;
 
-
-      this.setState({
-        roundCallsUs: inputs[0].value,
-        roundCallsThem: inputs[1].value
-      })
-    }
+      setRoundCallsUs(inputs[0].value);
+      setRoundCallsThem(inputs[1].value);
+  }
 }
 
-
-  enteringRoundPoints = (event) => {
-    console.log(this.state.maxPoints)
-    if (!(this.state.roundPointsUs && this.state.roundPointsThem)) {
+  const enteringRoundPoints = (event) => {
+    if (!(roundPointsUs && roundPointsThem)) {
      return;
     }
 
-    this.switchingDealer();
+    switchingDealer();
 
     const round = document.createElement('li');
     const detailsUs = document.createElement('p');
     const detailsThem = document.createElement('p');
     const details = document.createElement('p');
     
-    const totalPointsUs = Number.parseInt(this.state.roundPointsUs) + Number.parseInt((this.state.roundCallsUs.length) ? this.state.roundCallsUs : '0');
-    const totalPointsThem = Number.parseInt(this.state.roundPointsThem) + Number.parseInt((this.state.roundCallsThem.length) ? this.state.roundCallsThem : '0');
+    const totalPointsUs = Number.parseInt(roundPointsUs) + Number.parseInt((roundCallsUs.length) ? roundCallsUs : '0');
+    const totalPointsThem = Number.parseInt(roundPointsThem) + Number.parseInt((roundCallsThem.length) ? roundCallsThem : '0');
 
     detailsUs.className = 'details';
     detailsThem.className = 'details';
-    detailsUs.textContent = `${this.state.nameOfTeamUS}: ${this.state.roundPointsUs} Zvanja: ${this.state.roundCallsUs ? this.state.roundCallsUs :'0'}`;
-    detailsThem.textContent = `${this.state.nameOfTeamTHEM}: ${this.state.roundPointsThem} Zvanja: ${this.state.roundCallsThem ? this.state.roundCallsThem :'0'}`;
+    detailsUs.textContent = `${nameOfTeamUS}: ${roundPointsUs} Zvanja: ${roundCallsUs ? roundCallsUs :'0'}`;
+    detailsThem.textContent = `${nameOfTeamTHEM}: ${roundPointsThem} Zvanja: ${roundCallsThem ? roundCallsThem :'0'}`;
     details.className = 'detailsAll';
 
     details.append(detailsUs);
@@ -185,49 +153,44 @@ class App extends Component {
       round.classList.toggle('roundDetailsExit');
     }
 
-
-    round.textContent = `${this.state.nameOfTeamUS}: ${totalPointsUs} ${this.state.nameOfTeamTHEM}: ${totalPointsThem}`;
+    round.textContent = `${nameOfTeamUS}: ${totalPointsUs} ${nameOfTeamTHEM}: ${totalPointsThem}`;
     round.append(details);
     document.getElementById('rounds').appendChild(round);
 
-    const newPointsUs = this.state.totalPointsUs + totalPointsUs; 
-    const newPointsThem = this.state.totalPointsThem + totalPointsThem;
+    const newPointsUs = totalPointsUs + totalPointsUs; 
+    const newPointsThem = totalPointsThem + totalPointsThem;
     
-    this.setState({
-      totalPointsUs: newPointsUs,
-      totalPointsThem: newPointsThem,
-      roundPointsUs: '',
-      roundPointsThem: '',
-      roundCallsUs: '',
-      roundCallsThem: ''
-    })
+    setTotalPointsUs(newPointsUs);
+    setTotalPointsThem(newPointsThem);
+    setRoundPointsUs('');
+    setRoundPointsThem('');
+    setRoundCallsUs('');
+    setRoundCallsThem('');
 
     const inputs = document.getElementById('inputs').children;
     inputs[0].value = '';
     inputs[1].value = '';
     
-    if (newPointsUs >= this.state.maxPoints || newPointsThem >= this.state.maxPoints) {
-      setTimeout(()=>this.setState({
-        gameEnd: true,
-        inputState: false
-      }), 1500) 
+    if (newPointsUs >= maxPoints || newPointsThem >= maxPoints) {
+      setTimeout(()=>{
+        setGameEnd(true);
+        setInputState(false)
+      }, 1500) 
+
       localStorage.setItem('inputState', JSON.stringify(false));
 
       document.getElementById('BelaBlok').style.pointerEvents = 'none';
     }
   }
 
-  gameCallsButtons = (event) => {
+  const gameCallsButtons = (event) => {
 
     const buttons = event.target.parentElement.children;
-
     const inputs = document.getElementById('inputs').children;
 
     if (event.target.id === 'game') {
-      this.setState({
-        game: true, 
-        calls: false
-      });
+      setGame(true);
+      setCalls(false);
 
       buttons[0].classList.add('buttonsToggle');
       buttons[1].classList.remove('buttonsToggle');
@@ -236,92 +199,95 @@ class App extends Component {
       inputs[1].value = this.state.roundPointsThem;
   }  
     else if (event.target.id === 'calls') {
-      this.setState({
-        game: false, 
-        calls: true
-      }); 
+      setGame(false);
+      setCalls(true);
+
       buttons[0].classList.remove('buttonsToggle');
       buttons[1].classList.add('buttonsToggle');
 
-      inputs[0].value = this.state.roundCallsUs;
-      inputs[1].value = this.state.roundCallsThem;
+      inputs[0].value = roundCallsUs;
+      inputs[1].value = roundCallsThem;
   } 
 
 }
 
-  gameRangeButtons = (event) => {
-    if (!this.state.gameStart) {
-    this.setState({
-      maxPoints: event.target.value
-    })
-    const buttons = event.target.parentElement.children;
-    for (var i=0; i<3; i++) {
-      if (event.target.id === buttons[i].id) {
-        buttons[i].classList.add('gameRangeToggle');
-      } else {
-        buttons[i].classList.remove('gameRangeToggle');
+  const gameRangeButtons = (event) => {
+    if (!gameStart) {
+      setMaxPoints(event.target.value);
+
+      const buttons = event.target.parentElement.children;
+      for (var i=0; i<3; i++) {
+        if (event.target.id === buttons[i].id) {
+          buttons[i].classList.add('gameRangeToggle');
+        } else {
+          buttons[i].classList.remove('gameRangeToggle');
+        }
       }
     }
-  }
 }
 
-  onGameRestart = (event) => {
-    console.log(event.target.id);
+  const onGameRestart = (event) => {
     if (event.target.id === 'changeTeams') {
       localStorage.setItem('inputState', JSON.stringify(false))
-      this.setState({
-        gameStart: false,
-        inputState: false,
-        gameEnd: false,
-        nameOfTeamUS: 'Mi',
-        nameOfTeamTHEM: 'Vi',
-        maxPoints: 501,
-        roundPointsUs: '',
-        roundPointsThem: '',
-        roundCallsUs: '',
-        roundCallsThem: '',
-        totalPointsUs: 0,
-        totalPointsThem: 0,
-        game: true,
-        calls: false,
-        count : 0
-      })
+      setGameStart(false);
+      setInputState(false);
+      setGameEnd(false);
+      setNameOfTeamUS('Mi');
+      setNameOfTeamTHEM('Vi');
+      setMaxPoints(501);
+      setRoundPointsUs('');
+      setRoundPointsThem('');
+      setRoundCallsUs('');
+      setRoundCallsThem('');
+      setTotalPointsUs(0);
+      setTotalPointsThem(0);
+      setGame(true);
+      setCalls(false);
+      setCount(0)
+
     } else if (event.target.id === 'dontChangeTeams'){
-      this.setState({
-        gameStart: false,
-        gameEnd: false,
-        inputState: true,
-        maxPoints: 501,
-        roundPointsUs: '',
-        roundPointsThem: '',
-        roundCallsUs: '',
-        roundCallsThem: '',
-        totalPointsUs: 0,
-        totalPointsThem: 0,
-        game: true,
-        calls: false,
-        count : 0
-      })
-      localStorage.setItem('inputState', JSON.stringify(true))
+      setGameStart(false);
+      setInputState(true);
+      setGameEnd(false);
+      setMaxPoints(501);
+      setRoundPointsUs('');
+      setRoundPointsThem('');
+      setRoundCallsUs('');
+      setRoundCallsThem('');
+      setTotalPointsUs(0);
+      setTotalPointsThem(0);
+      setGame(true);
+      setCalls(false);
+      setCount(0)
+      // localStorage.setItem('inputState', JSON.stringify(true))
     }
 }
 
-  restartGame = (event)=>{
-    this.setState({
-      inputState: false
-    })
+  const restartGame = (event) => {
+    setGameStart(false);
+    setInputState(false);
+    setGameEnd(false);
+    setNameOfTeamUS('Mi');
+    setNameOfTeamTHEM('Vi');
+    setMaxPoints(501);
+    setRoundPointsUs('');
+    setRoundPointsThem('');
+    setRoundCallsUs('');
+    setRoundCallsThem('');
+    setTotalPointsUs(0);
+    setTotalPointsThem(0);
+    setGame(true);
+    setCalls(false);
+    setCount(0);
     localStorage.setItem('inputState', JSON.stringify(false));
   }
 
-  checkingDealer = (event) => {
-    if(event.target.id === this.state.count.toString()) {
+  const checkingDealer = (event) => {
+    if(event.target.id === count.toString()) {
       event.target.classList.add('bg-dark-green')
     }
   }
   
-
-  render(){
-    const {nameOfTeamTHEM,nameOfTeamUS, gameStart, inputState, gameEnd, totalPointsUs, totalPointsThem, count} = this.state;
   return (
     <div>   
         {gameStart ? 
@@ -330,7 +296,7 @@ class App extends Component {
             nameOfTeamTHEM={nameOfTeamTHEM}
             totalPointsUs={totalPointsUs}
             totalPointsThem={totalPointsThem}
-            onGameRestart = {this.onGameRestart}
+            onGameRestart = {onGameRestart}
           /> : 
            <div>
             <TeamNames 
@@ -340,12 +306,12 @@ class App extends Component {
               totalPointsThem={totalPointsThem}
               /> 
             <BelaBlok 
-              displayingPoints = {this.displayingPoints}
-              gameCallsButtons = {this.gameCallsButtons}
-              switchingDealer = {this.switchingDealer}
-              enteringRoundPoints = {this.enteringRoundPoints}
-              onClickingDealer={this.onClickingDealer}
-              checkingDealer={this.checkingDealer}
+              displayingPoints = {displayingPoints}
+              gameCallsButtons = {gameCallsButtons}
+              switchingDealer = {switchingDealer}
+              enteringRoundPoints = {enteringRoundPoints}
+              onClickingDealer={onClickingDealer}
+              checkingDealer={checkingDealer}
               />
             </div>
             )
@@ -353,25 +319,26 @@ class App extends Component {
         <div>
           {inputState ? <div> 
                           <DealerSelection 
-                            gameStartButton={this.gameStartButton}
-                            onClickingDealer={this.onClickingDealer}
-                            gameRangeButtons={this.gameRangeButtons}
+                            gameStartButton={gameStartButton}
+                            onClickingDealer={onClickingDealer}
+                            gameRangeButtons={gameRangeButtons}
                             />
                         </div>
                       : <TeamNameInputs 
-                          enteringTeamNames={this.enteringTeamNames} 
-                          onEnteringTeamsButton={this.onEnteringTeamsButton} /> 
+                          enteringTeamNames={enteringTeamNames} 
+                          onEnteringTeamsButton={onEnteringTeamsButton} /> 
               }
              
         </div>
         }
       
       <CreatedBy 
-        restartGame = {this.restartGame}
+        restartGame = {restartGame}
       />
      
     </div>
-)}
+)
 }
+
 
 export default App;
