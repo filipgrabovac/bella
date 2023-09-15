@@ -266,7 +266,8 @@ class App extends Component {
 }
 
   onGameRestart = (event) => {
-    if(event.target.id === 'changeTeams') {
+    console.log(event.target.id);
+    if (event.target.id === 'changeTeams') {
       localStorage.setItem('inputState', JSON.stringify(false))
       this.setState({
         gameStart: false,
@@ -350,7 +351,6 @@ class App extends Component {
             )
              : 
         <div>
-        
           {inputState ? <div> 
                           <DealerSelection 
                             gameStartButton={this.gameStartButton}

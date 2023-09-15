@@ -13,7 +13,7 @@ const GameEnd = ({nameOfTeamUS,nameOfTeamTHEM, totalPointsUs, totalPointsThem, o
 
             <div className='flex flex-column h-50'>
                 <h1 className='w-100 h-25 f1 white mb2'>Promjeniti imena timova?</h1>
-                <div className='flex'>
+                <div className='flex' >
                     <button id='changeTeams' className='grow endButton bg-dark-green bn' onClick={onGameRestart}>Promjeni</button>
                     <button id='dontChangeTeams' className='grow endButton bg-dark-green bn' onClick={onGameRestart}>Revanš!</button>
                 </div>
