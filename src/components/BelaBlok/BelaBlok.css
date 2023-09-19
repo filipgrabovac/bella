@@ -1,7 +1,7 @@
 .master {
     height: 1000px;
     animation: backgroundOnMount 2s forwards;
-    animation-delay: 2s;
+    animation-delay: 1.5s;
 }
 
 .BelaBlok {
@@ -13,7 +13,7 @@
     margin: 2% 0px 10% 5%;
     
     animation: BelaBlokAnimationOnMount 2s forwards;
-    animation-delay: 1s;
+    animation-delay: 0.8s;
     opacity: 0;
 }
 
@@ -97,8 +97,8 @@
     border-radius: 50px;
     pointer-events: none;
     opacity: 0;
-    animation: dealerIconsOnGameStart 2s forwards;
-    animation-delay: 1.5s;
+    animation: dealerIconsOnGameStart 1.5s forwards;
+    animation-delay: 1s;
 }
 
 
